@@ -34,6 +34,7 @@ export default function Add_data() {
           type="text"
           id="name"
           name="name"
+          value={name}
           onChange={(e) => setname(e.target.value)}
         />
         <br />

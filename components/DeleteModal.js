@@ -19,7 +19,7 @@ const style = {
   p: 4,
 };
 
-export default function KeepMountedModal({ id }) {
+export default function KeepMountedModal({ id ,onDelete }) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -33,7 +33,6 @@ export default function KeepMountedModal({ id }) {
         .delete(`http://127.0.0.1:8000/delete_book/${id}/`)
         .then(() => {
           handleClose();
-
           router.refresh()
         });
     } catch (error) {

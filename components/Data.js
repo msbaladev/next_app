@@ -2,7 +2,7 @@
 // import React, { useEffect, useState } from "react";
 
 import Image from "next/image";
-import DataTable from "./Table";
+
 
 const getProducts = async () => {
   const res = await fetch(process.env.URL,{cache:"no-store"});

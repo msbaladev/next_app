@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Button, Modal, Box, TextField } from "@mui/material";
 import { redirect, useRouter } from "next/navigation";
+import { EditNote } from "@mui/icons-material";
+import Cookies from "js-cookie";
 
 
 export default function BasicModal({ id }) {
@@ -13,10 +15,12 @@ export default function BasicModal({ id }) {
   const handleClose = () => setOpen(false);
 
   const router = useRouter()
+  const token = Cookies.get("token");
 
   const edit_book = async () => {
     setOpen(true);
     try {
+      axios.defaults.headers.Authorization = `Bearer ${token}`;
       const res = await axios.get(`http://127.0.0.1:8000/single_book/${id}/`);
       const data = res.data; 
       editedData(data.data[0].category)
@@ -30,6 +34,7 @@ export default function BasicModal({ id }) {
 
 const updateData = async ()=>{
   try {
+    axios.defaults.headers.Authorization = `Bearer ${token}`;
     const res = await axios.put(`http://127.0.0.1:8000/edit_book/${id}/`,{
       category:data,
       
@@ -46,7 +51,7 @@ const updateData = async ()=>{
 
   return (
     <div>
-      <Button onClick={edit_book}>Open modal</Button>
+      <Button onClick={edit_book}><EditNote  /></Button>
       <Modal
         open={open}
         onClose={handleClose}
